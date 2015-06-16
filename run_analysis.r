@@ -93,3 +93,5 @@ tidy <-
 
 # remove redundant variables
 rm(x_test, x_train, y_test, y_train, subject_test, subject_train)
+
+## testing git
