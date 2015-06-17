@@ -6,6 +6,7 @@ rm(list = ls()) # Make sure the workspace starts clear
 library(plyr) # Load R packages
 library(dplyr)
 library(tidyr)
+library(reshape2)
 
 ## download and extract zip
 url <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip "
