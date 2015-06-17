@@ -136,12 +136,12 @@ See [readme](https://github.com/alunmeredith/programmingAssignment3/blob/master/
 ####Mean:
 - Mean of this measurement calculated
 - Numeric
-- Units: Hz if frequency is measured, seconds if time is measured.
+- No units as the data has been normalised between -1:1
 
 ####Standard Deviation:
 - Standard Deviation of this measurement calculated
 - Numeric
-- Units: Hz if frequency is measured, seconds if time is measured. 
+- No units as the data has been normalised between -1:1
  
 ##Sources
 [http://vita.had.co.nz/papers/tidy-data.pdf](_Hadley Wickham_ Paper on *Tidy Data*)  

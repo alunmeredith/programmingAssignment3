@@ -1,5 +1,5 @@
 ## programmingAssignment3 - Human Activity Recognition Using Smartphones Dataset
-This project records the gyroscopic and accelerometer measurements of 30 volunteers age 19-48 performing six activities while wearing a smart phone on the waist. This script downloads the data and cleans it from its original form to produce an independent long tidy data set, which describes the mean and standard deviation of each measurement. 
+This project records the gyroscopic and accelerometer measurements of 30 volunteers age 19-48 performing six activities while wearing a smart phone on the waist. This script downloads the data and cleans it from its original form to produce an independent long tidy data set, which describes the mean and standard deviation of each measurement and meets the principles of a long form tidy data set.  
 
 #### Use 
 To run the script, ensure that the plyr, dplyr and tidyr packages are installed (script loads them automatically) and set the working directory to the place you want to extract the tidy data set to and run the script.
@@ -39,7 +39,7 @@ To run the script, ensure that the plyr, dplyr and tidyr packages are installed 
 	- Writes tidy data set to file. 
   
 ####Decision reasoning
-A long(tall) dataset option has been chosen. The reasons for this are because a lot of variables are stored in the header names in the wide dataset. With so many variables it is difficult to parse and apply analysis functions to without using logical expressions to parse the variable names. 
+A long(tall) dataset option has been chosen. The reasons for this are because a lot of variables are stored in the header names in the wide dataset. With so many variables it is difficult to parse and apply analysis functions to without using logical expressions to parse the variable names. Because all of the assignment data has been normalised it also strengthens the argument for long/tall data because they can now be directly compared. 
 
 The meanFreq() and angle() means were excluded because these are a weighted average and the angle() variables are means over a signal window sample. In essense these variables are too far extracted from the raw data to be considered measurements, and no longer measure the same instantaneous frequency/time domain measurements of the other variables.  
 
