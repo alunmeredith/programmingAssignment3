@@ -62,16 +62,8 @@ subset$Activity <- as.factor(subset$Activity)
 subset$Activity <- mapvalues(subset$Activity, activity_labels$Activity, as.character(activity_labels$Activity_id))
 
 
-## ---------------------------------------------------------------------
-## 4.0 Appropriately labels the data set with descriptive variable names
-## ---------------------------------------------------------------------
-
-# gsub mumbo jumbo
-#This has been done earlier :)
-rm(features)
-
 ## ------------------------------------------------------------------------------------------------------------------
-## 5.0 Create a second independent tidy data set with the average of each variable for each activity and each subject
+## 4.0 Create a second independent tidy data set with the average of each variable for each activity and each subject
 ## ------------------------------------------------------------------------------------------------------------------
 # collapses the rows into groups of subject/activity combo taking a mean of each
 tidy <-
@@ -81,6 +73,11 @@ tidy <-
 
 # Melts the variable names (besides subject, activity) into key - value pairs 
 melted <- melt(tidy)
+
+
+## 
+## Appropriately labels the data set with descriptive variable names
+## 
 
 # Uses grep to parse the variable names (now key) and release variable data
 # Creates new variable columns for Device, Dimension, Motion and Domain
@@ -113,4 +110,8 @@ done <- dcast(melted, Subject + Activity + Device + Dimension + Domain + Motion 
 done <- arrange(done, Subject, Activity, Domain, Motion, Jerk, Dimension)
 
 # remove redundant variables
-rm(x_test, x_train, y_test, y_train, subject_test, subject_train, activity_labels, tidy, subset, melted, url)
+rm(x_test, x_train, y_test, y_train, subject_test, subject_train, activity_labels, tidy, subset, melted, url, features)
+
+# Writes tidy data set to file
+setwd("..")
+write.table(done, file = "tidy.txt", row.name=FALSE)
