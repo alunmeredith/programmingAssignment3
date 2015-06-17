@@ -2,7 +2,7 @@
 This project records the gyroscopic and accelerometer measurements of 30 volunteers age 19-48 performing six activities while wearing a smart phone on the waist. This script downloads the data and cleans it from its original form to produce an independent long tidy data set, which describes the mean and standard deviation of each measurement and meets the principles of a long form tidy data set.  
 
 #### Use 
-To run the script, ensure that the plyr, dplyr and tidyr packages are installed (script loads them automatically) and set the working directory to the place you want to extract the tidy data set to and run the script.
+To run the script, ensure that the reshape, plyr, dplyr and tidyr packages are installed (script loads them automatically) and set the working directory to the place you want to extract the tidy data set to and run the script.
 
 #### Documentation
 1. Codebook can be [found here](https://github.com/alunmeredith/programmingAssignment3/blob/master/codebook.md)  
