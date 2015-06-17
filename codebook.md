@@ -8,12 +8,7 @@ output:
 ---
  
 ## Project Description
-Completed the following steps to clean a messy dataset
-1. Merges the training and the test sets to create one data set.
-2. Extracts only the measurements on the mean and standard deviation for each measurement. 
-3. Uses descriptive activity names to name the activities in the data set
-4. Appropriately labels the data set with descriptive variable names. 
-5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+Human Activity Recognition database built from the recordings of 30 subjects performing activities of daily living (ADL) while carrying a waist-mounted smartphone with embedded inertial sensors.
 
 ##Study design and data processing
  
@@ -23,11 +18,12 @@ The experiments have been carried out with a group of 30 volunteers within an ag
 ###Notes on the original (raw) data 
 The sensor signals (accelerometer and gyroscope) were pre-processed by applying noise filters and then sampled in fixed-width sliding windows of 2.56 sec and 50% overlap (128 readings/window). The sensor acceleration signal, which has gravitational and body motion components, was separated using a Butterworth low-pass filter into body acceleration and gravity. The gravitational force is assumed to have only low frequency components, therefore a filter with 0.3 Hz cutoff frequency was used. From each window, a vector of features was obtained by calculating variables from the time and frequency domain. 
 
-See 'features_info.txt' for more details.
+!!!!!!!!!!See 'features_info.txt' for more details.
 
 ##Creating the tidy datafile
  
 ###Guide to create the tidy data file
+The script downloads and extracts the zipfile to your current workind directory, please first navigate to desired directory
  - Download the zip file "UCI HAR Dataset" to the working directory
  - Unzip the zip file and move working directory into the UCI HAR Dataset directory
  - reads test and training data sets to x_test, x_train. 
@@ -39,33 +35,49 @@ See 'features_info.txt' for more details.
  - Adds the descriptive column labels indexed by features.txt to the data set
  - Selects only variables describing mean/std variables of observations. 
  - Changes the names of the activity factors to descriptive names as indexed in activity_labels
- - Collapses the rows into groups of subject and activity describing the mean of the variables for these groups. 
+ - Collapses the rows into groups of subject and activity describing the mean of the variables for these groups.
+ - Melts the features, then using grep parses the feature names to extract the variables "Device", "Dimension", "Motion", "Domain", "Jerk" and "function"
+ - Converts these variables to factors, removes the feature names column and orders the variables fixed then observed.
+ - Casts the Function variable giving two measurements, mean and standard deviation, orders the variables by the fixed variables in order of left to right.
  [link to the readme document that describes the code in greater detail]()
  
 ##Description of the variables in the tiny_data.txt file
 General description of the file including:
- - Dimensions of the dataset
- - Summary of the data
- - Variables present in the dataset
+ - 5940 obs. of 9 variables
+ - Subject, Activity, Device, Dimension, Domain, Motion, Jerk, Mean, Standard Deviation
  
-(you can easily use Rcode for this, just load the dataset and provide the information directly form the tidy data file)
+Subject:    Unique identifier for the person recording
+            Factor: 30 levels 1:30
+            No unit of measurement (counts people) 
  
-###Variable 1 (repeat this section for all variables in the dataset)
-Short description of what the variable describes.
- 
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
- 
-(you can easily use Rcode for this, just load the dataset and provide the information directly form the tidy data file)
- 
-####Notes on variable 1:
-If available, some additional notes on the variable not covered elsewehere. If no notes are present leave this section out.
+Activity:   Activity person was engadged in while recording
+            Factor: 6 levels: "WALKING", "WALKING_UPSTAIRS", "WALKING DOWNSTAIRS", "SITTING", "STANDING", "LAYING"
+            No unit of measurement (descriptor)
+
+Device:     Which measuring device was recording, accelerometer or gyroscope
+            Factor: 2 levels: "Accelerometer", "Gyroscope"
+            No unit of measurement (descriptor)
+
+Dimension:  Each measurement is broken down into its magnitude along each unit vector.
+            Mag is the magnitude along the unit vector describing current motion. 
+            Factor: 4 levels: "X", "Y", "Z", "Mag"
+            Units of measurement for each factor X:i-hat, Y:j-hat, Z:k-hat and Mag(unknown)
+              
+Domain:     Frequency or time domain measurements
+            Factor: 2 levels: "Frequency", "Time"
+            Unit of measurement: Frequency Hz, Time: s
+            
+Motion:     Body or gravitational source of motion based on a frequency filter.
+            Factor: 2 levels: "Body", "Gravitational"
+            No unit of measurement (descriptor)
+            
+Jerk:       Was this a measurement of Jerk
+            Factor: 2 levels: Not a Jerk measurement - "0", Jerk measurement - "1"
+            No unit of measurement (descriptor)
+
+Mean:       Mean of this measurement calculated
+            Numeric
+            Units: Hz if frequency is measured, seconds if time is measured. 
  
 ##Sources
 Sources you used if any, otherise leave out.
- 
-##Annex
-If you used any code in the codebook that had the echo=FALSE attribute post this here (make sure you set the results parameter to 'hide' as you do not want the results to show again)

@@ -7,17 +7,11 @@ library(plyr) # Load R packages
 library(dplyr)
 library(tidyr)
 
-## !!!!!!!!!! improve this so it doesn't have my username (generalise!)
-wd = "C:/Users/Alun/Documents/Work/Coding/Coursera/Data Cleaning/"
-setwd(wd) # Set working directory
-
 ## download and extract zip
 url <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip "
 download.file(url, dest="dataset.zip", mode="wb")
 unzip("dataset.zip")
-wd = "C:/Users/Alun/Documents/Work/Coding/Coursera/Data Cleaning/UCI HAR Dataset"
-setwd(wd)
-rm(url)
+setwd(paste(getwd(),"/UCI HAR Dataset",sep=""))
 
 # Read variables/data frames
 features <- read.table("features.txt", col.names=c("feature_id", "feature"))
@@ -113,10 +107,10 @@ melted$Domain <- as.factor(melted$Domain)
 melted$Jerk <- as.factor(melted$Jerk)
 
 # Removes the variable names / key, puts the measured values at the end. 
-melted <- select(melted, Subject, Activity, Domain, Motion, Jerk, Dimension, value)
+melted <- select(melted, Subject, Activity, Device, Domain, Motion, Jerk, Dimension, Function, value)
 
 done <- dcast(melted, Subject + Activity + Device + Dimension + Domain + Motion + Jerk ~ Function, value.var = "value")
 done <- arrange(done, Subject, Activity, Domain, Motion, Jerk, Dimension)
 
 # remove redundant variables
-#rm(x_test, x_train, y_test, y_train, subject_test, subject_train, activity_labels, tidy, subset)
+rm(x_test, x_train, y_test, y_train, subject_test, subject_train, activity_labels, tidy, subset, melted, url)
